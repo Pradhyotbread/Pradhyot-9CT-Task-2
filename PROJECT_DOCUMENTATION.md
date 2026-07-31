@@ -32,3 +32,48 @@ The moisture detection device (MDD) will use its sensors to detect the moisture 
 |Device changes measuring type|With a button press the device will change presets to another value range|A small LED changes color to signify the mode and the presets within the device would change| 
 |User makes a custom value|using a potentiometer the user could manually create a value range for the device to use| the device temporarily stores the value and uses it to provide a reading| 
 
+## Algorithms 
+### Flowchart
+ ![Diagram](MDD.png)
+
+### Pseudocode 
+pseudocode()  
+BEGIN PerfectM()  
+    clear_outputs()  
+    OUTPUT green_led.value(1)  
+    OUTPUT buzzer.on()  
+END PerfectM()  
+
+BEGIN too_dry()  
+    clear_outputs()  
+    OUTPUT yellow_Led.value(1)  
+    OUTPUT buzzer.on()  
+END too_dry  
+
+BEGIN too_wet()  
+    clear_outputs()  
+    OUTPUT red_Led.value(1)  
+    OUTPUT buzzer.on()  
+END too_wet  
+
+BEGIN Preset_Mode()  
+    clear_outputs()  
+    INPUT Button.value(+1)  
+    Preset_List[] (navigate through list with button)  
+    Preset_Value = Preset_List[chosen value]  
+END Preset_Mode()  
+
+BEGIN  
+    WHILE Device is on   
+       READ moisture level  
+       Preset_Mode()  
+       IF Mosture > Preset_Value  
+            THEN too_wet()  
+       END IF  
+       IF Moisture < Preset_Value  
+            THEN too_dry()  
+            ELSE PerfectM()  
+       END IF  
+    ENDWHILE  
+END
+
