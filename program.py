@@ -5,9 +5,9 @@ import time
 MoistureSensor = machine.ADC(machine.Pin(26)) # Initialize the sensor 
 led1 = machine.Pin(15, machine.Pin.OUT) # Initialize the green LED 
 led2 = machine.Pin(14, machine.Pin.OUT) # Initialize the red LED
-buzzer = machine.Pin(12, machine.Pin.OUT) # Initialize the buzzer
-button = machine.Pin(13, machine.Pin.IN, machine.Pin.PULL_DOWN) # Initialize the button for changing presets
-potentiometer = machine.ADC(machine.Pin(27)) # Initialize the potentiometer for the custom preset
+buzzer = machine.PWM(machine.Pin(13, machine.Pin.OUT)) # Initialize the buzzer
+button = machine.Pin(12, machine.Pin.IN, machine.Pin.PULL_DOWN) # Initialize the button for changing presets
+potentiometer = machine.ADC(machine.Pin(26)) # Initialize the potentiometer for the custom preset
 
 def SnakePlant(): #preset 1
     MinLevel = 250
@@ -41,18 +41,23 @@ def Custom(): #preset 7 (configureable)
 def tooDry(): # Function to show that its too dry
     led1.value(0) # Turn off the green LED
     led2.value(1) # Turn on the red LED
-    buzzer.value(1) # Turn on the buzzer
+    buzzer.freq(1500)
+    buzzer.duty_u16(1000)
     time.sleep(2) # Wait for 2 seconds
 def justRight(): # Function to show that its just right
     led1.value(1) # Turn on the green LED
     led2.value(0) # Turn off the red LED
-    buzzer.value(0) # Turn off the buzzer
     time.sleep(2) # Wait for 2 seconds
 def tooWet(): # Function to show that its too wet
     led1.value(0) # Turn off the green LED
     led2.value(1) # Turn on the red LED
-    buzzer.value(1) # Turn on the buzzer
+    buzzer.freq(1500)
+    buzzer.duty_u16(1000)
     time.sleep(2) # Wait for 2 seconds
+def clearAll():
+     led1.value(0)
+     led2.value(0)
+     buzzer.duty_u16(0)
 
 Presetlist = [SnakePlant, SwissCheesePlant, Pothos, Strawberry, Hydrangea, Dry, Custom]
 
@@ -71,7 +76,8 @@ while True: #main Program
          tooWet()
     else: # If the moisture level is within the range, turn on the green LED
          justRight()
-    time.sleep(3) # Wait for 3 seconds before reading again
+    time.sleep(4) # Wait for 4 seconds before continuing
+    clearAll()
 
 
 
