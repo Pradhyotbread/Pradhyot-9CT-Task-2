@@ -5,7 +5,7 @@ import time
 MoistureSensor = machine.ADC(machine.Pin(26)) # Initialize the sensor 
 led1 = machine.Pin(15, machine.Pin.OUT) # Initialize the green LED 
 led2 = machine.Pin(14, machine.Pin.OUT) # Initialize the red LED
-buzzer = machine.Pin(11, machine.Pin.OUT) # Initialize the buzzer
+buzzer = machine.Pin(12, machine.Pin.OUT) # Initialize the buzzer
 button = machine.Pin(13, machine.Pin.IN, machine.Pin.PULL_DOWN) # Initialize the button for changing presets
 potentiometer = machine.ADC(machine.Pin(27)) # Initialize the potentiometer for the custom preset
 
