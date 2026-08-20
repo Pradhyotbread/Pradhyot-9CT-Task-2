@@ -21,7 +21,6 @@ def SnakePlant(): #preset 1
         buzzer.duty_u16(0)
         time.sleep(0.2)
     return MinLevel, MaxLevel
-
 def SwissCheesePlant(): #preset 2
      MinLevel = 750
      MaxLevel = 950
@@ -77,13 +76,13 @@ def Custom(): #preset 7 (configureable)
         buzzer.duty_u16(0)
         time.sleep(0.2)
      return MinLevel, MaxLevel
+
 # Functions to control the LEDs based on the moisture level, green LED for just right, red LED to dictate if the subject is not within the selected range, yellow LED for too dry, blue LED for too wet
 def tooDry(): # Function to show that its too dry
     led1.value(1)
     led2.value(0) 
     led3.value(1) 
     led4.value(0) 
-
 def justRight(): # Function to show that its just right
     led1.value(0) 
     led2.value(1) 
@@ -119,4 +118,3 @@ while True: #main Program
         tooWet()
     else:
         justRight()
-
